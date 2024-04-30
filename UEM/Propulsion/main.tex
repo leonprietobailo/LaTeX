@@ -1,0 +1,217 @@
+\documentclass{report}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[spanish]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with `a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+
+\title{Sistemas de propulsión, actuaciones e integración.}
+\author{León E. Prieto Bailo}
+
+\begin{document}
+\maketitle
+
+% \begin{abstract}
+% Your abstract.
+% \end{abstract}
+
+\section{Enunciado}
+
+Una turbina de gas industrial opera a nivel del mar. Absorbe 66.67 Kg/s de aire. El compresor opera con una relación de compresión de 18:1 y una eficiencia del 99\%. La temperatura total de salida de cámara de combustión es 1456 K, y la eficiencia de la cámara de combustión es del 96\%, perdiendo un 4\% de presión total, y la turbina tiene un rendimiento del 91\%. La entrada de aire pierde un 4\% de presión total. L = 42.8 MJ/kg\\
+
+Calcular La potencia obtenida, el consumo específico, y la eficiencia térmica.\\
+
+Se decide estudiar el compresor, y se observa que no tiene álabes guía, que el mach axial de entrada es 0.5, y que el ángulo (relativo) de entrada en los álabes del rotor para dos casos $\beta\textsubscript{1}$ = 46 ºC, y $\beta\textsubscript{2}$ = 51 ºC. Y se sabe también que el diseño incluye h/c=1.5. Suponiendo para ambos casos que se diseña con $W\textsubscript{2}/W\textsubscript{1}$ = 0.7, la velocidad circunferencial de giro en la punta del álabe es 450 m/s, la viscosidad cinemática es 1.73E-5 m$\textsuperscript{2}$/s, el factor de difusión en el rotor es de valor 0.45 (línea media), y que la salida del aire de cada estátor es 0 ºC y la velocidad axial es constante\\
+
+Calcular y comparar:\
+
+\begin{itemize}
+    \item Ángulos relativos y absolutos de la corriente de aire, deflexión de la corriente en rotor y estátor (en línea media)
+    \item Número de escalones de todo el compresor
+    \item Relación de compresión del escalón
+    \item Área frontal de la entrada (Radio exterior e interior del rotor)
+    \item Velocidad de giro del eje
+    \item Cuerda del álabe, y número de álabes del rotor
+    \item Número de Reynolds en el álabe basado en la cuerda
+    \item Grado de reacción
+\end{itemize}
+\newpage
+\section{Resolución}
+\subsection{Primera parte}
+\subsubsection{Calcular la potencia obtenida, el consumo específico, y la eficiencia térmica.}
+Asumiendo condiciones de atmosfera estandar:
+\begin{gather}
+  T_0 = 283\:K\\
+  \vspace{1cm}
+  P_0 = 101,325\:KPa
+\end{gather}
+Asumiendo que la turbina de gas industrial está estatica:
+\begin{gather}
+  T_{t0} = T_0\\
+  P_{t0} = P_0
+\end{gather}
+Considerando las perdidas a la entrada de la turbomaquina:
+\begin{gather}
+  P_{t2} = P_{t0} \pi_i=97,272\:KPa\\
+  T_{t2} = T_{t0} \pi_i^{\frac{\gamma-1}{\gamma}} = 279.72\:K
+\end{gather}
+En la etapa del compresor:
+\begin{gather}
+  P_{t3} = P_{t2} \pi_c=1,750\:MPa\\
+  \eta = \frac{T_{t3}'-T_{T2}}{T_{t3}-T_{T2}}=\frac{\pi_c^\frac{\gamma-1}{\gamma}-1}{\frac{T_{t3}}{T_{t2}}-1}\xrightarrow{}T_{t3} = 642,43\:K
+\end{gather}
+Conociendo el salto de temperaturas en el compresor, podemos hallar la potencia obtenida:
+\begin{gather}
+  P=\Dot{m_a}C_p(T_{t3}-T_{t2})=\boxed{24,302\:MW}
+\end{gather}
+Para la salida de la camara de combustión:
+\begin{gather}
+  T_{t4} = 1456\:K\\
+  P_{t4} = P_{t3} \pi_{cc}=1,680\:MPa
+\end{gather}
+Planteando el balance energetico y sabiendo que el compresor es alimentado por el movimento de la turbina: 
+\begin{gather}
+  \Dot{m_a}C_p(T_{t3}-T_{t2})=\Dot{m_t}C_p(T_{t4}-T_{t5})
+\end{gather}
+Para obtener el valor del flujo masico total, es necesario calcular el consumo de combustible. Para hacerlo, planteamos el incremento de entalpias en la camara de combustión:
+\begin{gather}
+  h_{04}=h{03}+fL
+\end{gather}
+Lo cual, se puede reescribir como:
+\begin{gather}
+  f=\frac{\frac{T_{t4}}{T_{t3}}-1}{\frac{L}{C_p}T_{t3}-\frac{T_{t4}}{T_{t3}}}
+\end{gather}
+Teniendo el valor de $f$, podemos hallar la temperatura a la salida de la turbina $(T_{t5})$ como:
+\begin{gather}
+  T_{t5}=T_{t4}-\frac{1}{1+f}(T_{t3}-T_{t2})=1093.28\:K
+\end{gather}
+Mientras que, el valor de la presion total a la salida de la turbina $(P_{t5})$ podemos hallarla con la expresion del rendimiento adiabático $(\eta_T)$:
+\begin{gather}
+  \eta_T = \frac{T_{t4}-T_{t5}}{T_{t4}-T_{t5}'}=\frac{1-\frac{T_{t5}}{T_{t4}}}{1-\left(\frac{P_t5}{P_t4}\right)^\frac{\gamma-1}{\gamma}}\xrightarrow{}P_{t5}=P_{t4}\left(1-\frac{1-\frac{T_{t5}}{T_{t4}}}{\eta_T}\right)^\frac{\gamma}{\gamma-1}=1,662\:MPa
+\end{gather}
+Asumiento comportamiento isentalpico en la salida:
+\begin{gather}
+  T_{t7} = T_{t5}\\
+  P_{t7} = P_{t5}
+\end{gather}
+Estudiando las condiciones criticas de la tobera:
+\begin{gather}
+  \frac{P_{t7}}{P^*}=\left(\frac{\gamma+1}{2}\right)^\frac{\gamma}{\gamma-1}=1,893\\
+  \frac{P_{t7}}{P_0}=16,41 >> 1,893
+\end{gather}
+Por lo tanto nos encontramos en condiciones críticas, por lo que:
+\begin{gather}
+  M_7 = 1\\
+  T_7 = T_{t7} \frac{1}{1 + \frac{\gamma - 1}{2}} = 911,07\:K\\
+  P_7 = P_{t7} \frac{1}{1 + \left(\frac{\gamma - 1}{2}\right)^\frac{\gamma}{\gamma-1}}=87,843\:MPa
+\end{gather}
+Calculando la velocidad de salida $(V_7)$, la densidad $(\rho_7)$ y el area de la tobera $(A_7)$:
+\begin{gather}
+  V_7 = \sqrt{\gamma R T_7}=605,04\:m/s\\
+  \rho_7 = \frac{P_7}{R T_7}=3,34\:kg/m^3\\
+  A_7 = \frac{\Dot{m} (1+f)}{\rho_7 V_7}=0,0328\:m^2
+\end{gather}
+Calculando el empuje y el consumo espeficico:
+\begin{gather}
+  T = \Dot{m} (1+f) V_7 + (P_7-P_0)A_7=65,856\:kN\\
+  TSFC = \frac{\Dot{m} (1+f)}{T}=\boxed{0,168\:\frac{g}{kN h}}
+\end{gather}
+\subsection{Segunda parte}
+\subsubsection{Ángulos relativos y absolutos de la corriente de aire, deflexión de la corriente en rotor y estátor (en línea media)}
+
+
+
+
+% \subsection{How to include Figures}
+
+% First you have to upload the image file from your computer using the upload link in the file-tree menu. Then use the includegraphics command to include it in your document. Use the figure environment and the caption command to add a number and a caption to your figure. See the code for Figure \ref{fig:frog} in this section for an example.
+
+% Note that your figure will automatically be placed in the most appropriate place for it, given the surrounding text and taking into account other figures or tables that may be close by. You can find out more about adding images to your documents in this help article on \href{https://www.overleaf.com/learn/how-to/Including_images_on_Overleaf}{including images on Overleaf}.
+
+% % \begin{figure}
+% % \centering
+% % \includegraphics[width=0.25\linewidth]{frog.jpg}
+% % \caption{\label{fig:frog}This frog was uploaded via the file-tree menu.}
+% % \end{figure}
+
+% \subsection{How to add Tables}
+
+% Use the table and tabular environments for basic tables --- see Table~\ref{tab:widgets}, for example. For more information, please see this help article on \href{https://www.overleaf.com/learn/latex/tables}{tables}. 
+
+% \begin{table}
+% \centering
+% \begin{tabular}{l|r}
+% Item & Quantity \\\hline
+% Widgets & 42 \\
+% Gadgets & 13
+% \end{tabular}
+% \caption{\label{tab:widgets}An example table.}
+% \end{table}
+
+% \subsection{How to add Comments and Track Changes}
+
+% Comments can be added to your project by highlighting some text and clicking ``Add comment'' in the top right of the editor pane. To view existing comments, click on the Review menu in the toolbar above. To reply to a comment, click on the Reply button in the lower right corner of the comment. You can close the Review pane by clicking its name on the toolbar when you're done reviewing for the time being.
+
+% Track changes are available on all our \href{https://www.overleaf.com/user/subscription/plans}{premium plans}, and can be toggled on or off using the option at the top of the Review pane. Track changes allow you to keep track of every change made to the document, along with the person making the change. 
+
+% \subsection{How to add Lists}
+
+% You can make lists with automatic numbering \dots
+
+% \begin{enumerate}
+% \item Like this,
+% \item and like this.
+% \end{enumerate}
+% \dots or bullet points \dots
+% \begin{itemize}
+% \item Like this,
+% \item and like this.
+% \end{itemize}
+
+% \subsection{How to write Mathematics}
+
+% \LaTeX{} is great at typesetting mathematics. Let $X_1, X_2, \ldots, X_n$ be a sequence of independent and identically distributed random variables with $\text{E}[X_i] = \mu$ and $\text{Var}[X_i] = \sigma^2 < \infty$, and let
+% \[S_n = \frac{X_1 + X_2 + \cdots + X_n}{n}
+%       = \frac{1}{n}\sum_{i}^{n} X_i\]
+% denote their mean. Then as $n$ approaches infinity, the random variables $\sqrt{n}(S_n - \mu)$ converge in distribution to a normal $\mathcal{N}(0, \sigma^2)$.
+
+
+% \subsection{How to change the margins and paper size}
+
+% Usually the template you're using will have the page margins and paper size set correctly for that use-case. For example, if you're using a journal article template provided by the journal publisher, that template will be formatted according to their requirements. In these cases, it's best not to alter the margins directly.
+
+% If however you're using a more general template, such as this one, and would like to alter the margins, a common way to do so is via the geometry package. You can find the geometry package loaded in the preamble at the top of this example file, and if you'd like to learn more about how to adjust the settings, please visit this help article on \href{https://www.overleaf.com/learn/latex/page_size_and_margins}{page size and margins}.
+
+% \subsection{How to change the document language and spell check settings}
+
+% Overleaf supports many different languages, including multiple different languages within one document. 
+
+% To configure the document language, simply edit the option provided to the babel package in the preamble at the top of this example project. To learn more about the different options, please visit this help article on \href{https://www.overleaf.com/learn/latex/International_language_support}{international language support}.
+
+% To change the spell check language, simply open the Overleaf menu at the top left of the editor window, scroll down to the spell check setting, and adjust accordingly.
+
+% \subsection{How to add Citations and a References List}
+
+% You can simply upload a \verb|.bib| file containing your BibTeX entries, created with a tool such as JabRef. You can then cite entries from it, like this: \cite{greenwade93}. Just remember to specify a bibliography style, as well as the filename of the \verb|.bib|. You can find a \href{https://www.overleaf.com/help/97-how-to-include-a-bibliography-using-bibtex}{video tutorial here} to learn more about BibTeX.
+
+% If you have an \href{https://www.overleaf.com/user/subscription/plans}{upgraded account}, you can also import your Mendeley or Zotero library directly as a \verb|.bib| file, via the upload menu in the file-tree.
+
+% \subsection{Good luck!}
+
+% We hope you find Overleaf useful, and do take a look at our \href{https://www.overleaf.com/learn}{help library} for more tutorials and user guides! Please also let us know if you have any feedback using the Contact Us link at the bottom of the Overleaf menu --- or use the contact form at \url{https://www.overleaf.com/contact}.
+
+% \bibliographystyle{alpha}
+% \bibliography{sample}
+
+\end{document}
