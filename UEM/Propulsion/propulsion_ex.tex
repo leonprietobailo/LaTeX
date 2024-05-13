@@ -1,0 +1,272 @@
+\documentclass{report}
+\usepackage[spanish]{babel}
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{gensymb}
+
+\pagestyle{fancy}
+\fancyhead[L]{Sistemas de propulsión, actuaciones e integración.}
+\fancyhead[R]{León E. Prieto Bailo}
+
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+
+\title{Sistemas de propulsión, actuaciones e integración.}
+\author{León E. Prieto Bailo}
+
+\begin{document}
+\maketitle
+
+% \begin{abstract}
+% Your abstract.
+% \end{abstract}
+
+\section{Enunciado}
+
+Una turbina de gas industrial opera a nivel del mar. Absorbe 66.67 Kg/s de aire. El compresor opera con una relación de compresión de 18:1 y una eficiencia del 99\%. La temperatura total de salida de cámara de combustión es 1456 K, y la eficiencia de la cámara de combustión es del 96\%, perdiendo un 4\% de presión total, y la turbina tiene un rendimiento del 91\%. La entrada de aire pierde un 4\% de presión total. L = 42.8 MJ/kg\\
+
+Calcular La potencia obtenida, el consumo específico, y la eficiencia térmica.\\
+
+Se decide estudiar el compresor, y se observa que no tiene álabes guía, que el mach axial de entrada es 0.5, y que el ángulo (relativo) de entrada en los álabes del rotor para dos casos $\beta_1$ = 46º, y $\beta_2$ = 51º. Y se sabe también que el diseño incluye h/c=1.5. Suponiendo para ambos casos que se diseña con $W_2/W_1$ = 0.7, la velocidad circunferencial de giro en la punta del álabe es 250 m/s, la viscosidad cinemática es $1.73\cdot10^{-5}$ $m^2$/s, el factor de difusión en el rotor es de valor 0.45 (línea media), y que la salida del aire de cada estátor es 0º y la velocidad axial es constante\\
+
+Calcular y comparar:\
+
+\begin{itemize}
+\item Ángulos relativos y absolutos de la corriente de aire, deflexión de la corriente en rotor y estátor (en línea media)
+\item Número de escalones de todo el compresor
+\item Relación de compresión del escalón
+\item Área frontal de la entrada (Radio exterior e interior del rotor)
+\item Velocidad de giro del eje
+\item Cuerda del álabe, y número de álabes del rotor
+\item Número de Reynolds en el álabe basado en la cuerda
+\item Grado de reacción
+\end{itemize}
+\newpage
+\section{Resolución}
+\subsection{Primera parte}
+\subsubsection{Calcular la potencia obtenida, el consumo específico, y la eficiencia térmica.}
+Asumiendo condiciones de atmosfera estándar:
+\begin{gather}
+T_0 = 288\:K\\
+\vspace{1cm}
+P_0 = 101,325\:KPa
+\end{gather}
+Asumiendo que la turbina de gas industrial se halla estática con respecto al flujo:
+\begin{gather}
+T_{t0} = T_0\\
+P_{t0} = P_0
+\end{gather}
+Considerando las perdidas a la entrada de la turbomáquina:
+\begin{gather}
+P_{t2} = P_{t0} \pi_i=97,272\:KPa\\
+T_{t2} = T_{t0} \pi_i^{\frac{\gamma-1}{\gamma}} = 284.66\:K
+\end{gather}
+En la etapa del compresor:
+\begin{gather}
+P_{t3} = P_{t2} \pi_c=1,750\:MPa\\
+\eta = \frac{T_{t3}'-T_{t2}}{T_{t3}-T_{t2}}=\frac{\pi_c^\frac{\gamma-1}{\gamma}-1}{\frac{T_{t3}}{T_{t2}}-1}\xrightarrow{}T_{t3} = 653,79\:K
+\end{gather}
+Conociendo el salto de temperaturas en el compresor, podemos hallar la potencia obtenida:
+\begin{gather}
+P=\Dot{m_a}C_p(T_{t3}-T_{t2})=\boxed{24,73\:MW}
+\end{gather}
+A la salida de la cámara de combustión:
+\begin{gather}
+T_{t4} = 1456\:K\\
+P_{t4} = P_{t3} \pi_{cc}=1,680\:MPa
+\end{gather}
+Planteando el balance energético y sabiendo que el compresor es alimentado por el movimiento de la turbina:
+\begin{gather}
+\Dot{m_a}C_p(T_{t3}-T_{t2})=\Dot{m_t}C_p(T_{t4}-T_{t5})
+\end{gather}
+Teniendo en cuenta la eficiencia adiabática de la cámara de combustión:
+\begin{gather}
+\eta_{cc}=\frac{T_{t4}-T_{t3}}{T_{t4}'-T_{t3}}\xrightarrow{}T_{t4}'=T_{t3}+\frac{T_{t4}-T_{t3}}{\eta_{cc}}=1489.4\:K
+\end{gather}
+Para obtener el valor del flujo másico total, es necesario calcular el consumo de combustible. Para hacerlo, planteamos el incremento de entalpías en la cámara de combustión:
+\begin{gather}
+h_{04}=h_{03}+fL
+\end{gather}
+Lo cual, se puede reescribir como:
+\begin{gather}
+f=\frac{\frac{T_{t4}'}{T_{t3}}-1}{\frac{L}{C_p T_{t3}}-\frac{T_{t4}'}{T_{t3}}}=0,0203
+\end{gather}
+Teniendo el valor de $f$, podemos hallar la temperatura a la salida de la turbina $(T_{t5})$ como:
+\begin{gather}
+T_{t5}=T_{t4}-\frac{1}{1+f}(T_{t3}-T_{t2})=1094.23\:K
+\end{gather}
+Mientras que, el valor de la presión total a la salida de la turbina $(P_{t5})$ se puede hallar mediante la expresión del rendimiento adiabático $(\eta_T)$:
+\begin{gather}
+\eta_T = \frac{T_{t4}-T_{t5}}{T_{t4}-T_{t5}'}=\frac{1-\frac{T_{t5}}{T_{t4}}}{1-\left(\frac{P_t5}{P_t4}\right)^\frac{\gamma-1}{\gamma}}\xrightarrow{}P_{t5}=P_{t4}\left(1-\frac{1-\frac{T_{t5}}{T_{t4}}}{\eta_T}\right)^\frac{\gamma}{\gamma-1}=550,6\:kPa
+\end{gather}
+Asumiendo comportamiento isoentálpico en la salida:
+\begin{gather}
+T_{t7} = T_{t5}\\
+P_{t7} = P_{t5}
+\end{gather}
+Estudiando las condiciones críticas de la tobera:
+\begin{gather}
+\frac{P_{t7}}{P^*}=\left(\frac{\gamma+1}{2}\right)^\frac{\gamma}{\gamma-1}=1,893\\
+\frac{P_{t7}}{P_0}=5,43 >> 1,893
+\end{gather}
+Por lo tanto, nos hallamos en régimen crítico:
+\begin{gather}
+M_7 = 1\\
+T_7 = T_{t7} \frac{1}{1 + \frac{\gamma - 1}{2}} = 911,86\:K\\
+P_7 = P_{t7} \frac{1}{1 + \left(\frac{\gamma - 1}{2}\right)^\frac{\gamma}{\gamma-1}}=290,85\:kPa
+\end{gather}
+Calculando la velocidad de salida $(V_7)$, la densidad $(\rho_7)$ y el área de la tobera $(A_7)$:
+\begin{gather}
+V_7 = \sqrt{\gamma R T_7}=605,3\:m/s\\
+\rho_7 = \frac{P_7}{R T_7}=1,11\:kg/m^3\\
+A_7 = \frac{\Dot{m} (1+f)}{\rho_7 V_7}=0,101\:m^2
+\end{gather}
+Calculando el empuje y el consumo específico:
+\begin{gather}
+T = \Dot{m} (1+f) V_7 + (P_7-P_0)A_7=60,367\:kN\\
+TSFC = \frac{\Dot{m} (1+f)}{T}=\boxed{22,45\:\ g/kN/s}
+\end{gather}
+Podemos obtener la eficiencia térmica de la turbina de gas relacionando la potencia aprovechada por la turbina con la potencia generada por la quema de combustible en la cámara de combustión.
+\begin{gather}
+\eta_T = \frac{P}{\Dot{m}_f L}=\boxed{0.426}
+\end{gather}
+\newpage
+\subsection{Segunda parte}
+Para la realización de la segunda parte del ejercicio, se plantea el modelo matemático y, finalmente, se realizan las comparaciones pertinentes.
+\subsubsection{Ángulos relativos y absolutos de la corriente de aire, deflexión de la corriente en rotor y estátor (en línea media)}
+Inicialmente:
+\begin{gather}
+\alpha_1 = 0\degree\\
+T_{t0} = 288\degree\\
+T_{1} = \frac{T_{t0}}{1+\frac{\gamma-1}{2}M_a^2}
+\end{gather}
+Con el mach axial de entrada:
+\begin{gather}
+C_1 = C_a = M_a \cdot \sqrt{\gamma R T_1}
+\end{gather}
+Empleando relaciones trigonométricas, podemos hallar el resto de velocidades de la primera etapa:
+\begin{gather}
+W_1 = \frac{C_a}{\cos(\beta_1)}\\
+U = \frac{C_a}{\tan(\beta_1)}
+\end{gather}
+Conociendo la relación entre las velocidades relativas a la entrada y salida del rotor, podemos hallar las velocidades de la segunda etapa:
+\begin{gather}
+C_2 = C_a\\
+W_2 = W_1 \cdot \frac{W_2}{W_1}\\
+\beta_2 = \arccos\left(\frac{C_2}{W_2}\right)\\
+W_{2u} = W_2 \cdot \sin(\beta_2)\\
+V_{2u} = U - W_{2u}\\
+C_2 = \sqrt{V_{2u}^2 + C_2^2}\\
+\alpha_2 = \arctan\left(\frac{V_{2u}}{C_2}\right)
+\end{gather}
+Calculando la deflexión de la corriente:
+\begin{gather}
+\delta_{12} = \beta_1 - \beta_2
+\end{gather}
+\subsubsection{Número de escalones de todo el compresor}
+Obtenemos el valor de temperatura relativa a la entrada del rotor, el cual es equivalente a la salida del mismo:
+\begin{gather}
+T_{t2,rel} = T_1 + \frac{W_1^2}{2 C_p}
+\end{gather}
+Calculamos la temperatura a la entrada del estator:
+\begin{gather}
+T_2 = T_{t2,rel} - \frac{W_2^2}{2 C_p}
+\end{gather}
+Y, finalmente, conociendo la equivalencia de temperaturas totales a la salida del estator:
+\begin{gather}
+T_{t3} = T_{t2} = T_2 + \frac{C_2^2}{2 C_p}
+\end{gather}
+Conociendo la relación de compresión del compresor, podemos hallar el número de escalones:
+\begin{gather}
+n_{esc} = \frac{\pi_c}{\left(\frac{P_{03}}{P_{01}}\right)_{esc}}
+\end{gather}
+\subsubsection{Relación de compresión del escalón}
+Podemos obtener la relación de compresión del escalón de la siguiente manera:
+\begin{gather}
+\frac{P_{t3}}{P_{t1}} = \left(\frac{T_{t3}}{T_{t1}}\right)^\frac{\gamma}{\gamma-1}
+\end{gather}
+\subsubsection{Área frontal de la entrada (Radio exterior e interior del rotor)}
+Podemos hallar el área frontal de la entrada:
+\begin{gather}
+A = \frac{\Dot{m}}{\rho_1 C_a}
+\end{gather}
+Siendo:
+\begin{gather}
+\rho_1 = \frac{P_1}{R T_1}
+\end{gather}
+Para el cálculo del radio medio, debemos plantear el siguiente sistema de ecuaciones:
+\[
+\left\{
+\begin{aligned}
+A = \pi (R_e^2 - R_i^2)\\
+\bar{R} = \frac{R_e + R_i}{2}\\
+\frac{\bar{R}}{R_{tip}} = \frac{U}{U_{tip}}
+\end{aligned}
+\right.
+\]
+
+\subsubsection{Velocidad de giro del eje}
+La velocidad de giro del eje se puede hallar como:
+\begin{gather}
+\omega = \frac{U}{\bar{R}}
+\end{gather}
+\subsubsection{Cuerda del álabe, y número de álabes del rotor}
+La cuerda del álabe se puede hallar como:
+\begin{gather}
+c = \frac{R_e-R_i}{h/c}
+\end{gather}
+El número de álabes se encuentra como:
+\begin{gather}
+N = \frac{2 \pi \bar{R}}{c}
+\end{gather}
+Donde:
+\begin{gather}
+S = \frac{c}{\sigma}
+\end{gather}
+Para hallar el valor de $\sigma$, debemos emplear el factor de difusión proporcionado por el enunciado:
+\begin{gather}
+DF = 1 - \frac{w_2}{w_1} + \frac{|w_{u2}-w_{1u}|}{2 \sigma w_1}\\
+\sigma = \frac{|w_{u2}-w_{1u}|}{2 w_1 (DF - 1 + \frac{w_2}{w_1})}
+\end{gather}
+\subsubsection{Número de Reynolds en el álabe basado en la cuerda}
+El número de Reynolds se define como:
+\begin{gather}
+Re = \frac{\rho V c}{\mu} = \frac{V c}{\nu}
+\end{gather}
+\subsubsection{Grado de reacción}
+El grado de reacción del escalón podemos encontrarlo como:
+\begin{gather}
+\Lambda = \frac{T_2-T_1}{T_3-T_1}
+\end{gather}
+\subsection{Comparativa de los resultados obtenidos:}
+A continuación, se presentan los resultados obtenidos para los dos casos planteados en el enunciado:
+
+\begin{center}
+\begin{tabular}{l | c | c | c}
+Magnitud & $\beta_1 = 46\degree$ & $\beta_2 = 51\degree$ & Unidad\\
+\hline
+$\alpha_1$ & 0 & 0 & deg \\
+$\alpha_2$ & 40,07 & 17,89 & deg \\
+$\alpha_3$ & 0 & 0 & deg \\
+$\beta_1$ & 46 & 51 & deg \\
+$\beta_2$ & 7,08 & 25,97 & deg \\
+$\beta_3$ & 46 & 51 & deg \\
+$\delta_{12}$ & 38,9 & 25,03 & deg \\
+$n_{esc}$ & 14 & 15 & 1 \\
+$P_{t3}/P_{t1}$ & 1,33 & 1,25 & 1 \\
+$R_e$ & 0,33 & 0,32 & m \\
+$R_i$ & 0,09 & 0,023 & m \\
+$\bar{R}$& 0,21 & 0,17 & m \\
+$\omega$ & 760,96 & 790,98 & rad/s \\
+$c$ & 0,16 & 0,19 & m \\
+$n_{alabe}$ & 17 & 4 & 1 \\
+$Re$ & $1.508 \cdot 10^6$ & $1.869 \cdot 10^6$ & 1 \\
+$\Lambda$ & 0,599 & 0,925 & 1 \\
+\end{tabular}
+\end{center}
+\end{document}
